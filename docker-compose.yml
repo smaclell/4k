@@ -1,0 +1,24 @@
+version: '3'
+volumes:
+  yarn-cache:
+  node-modules:
+
+services:
+  web:
+    environment:
+      NODE_ENV: '${NODE_ENV:-development}'
+    container_name: 'four-thousand'
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: [yarn, run, nodemon]
+    ports:
+      - '19200:80'
+      - '19201:19201'
+    expose:
+      - '19201'
+    network_mode: "bridge"
+    volumes:
+      - yarn-cache:/root/.cache/yarn
+      - node-modules:/4k/node_modules/
+      - .:/4k
