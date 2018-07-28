@@ -5,13 +5,21 @@
 [![Code of Conduct](https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square)](https://github.com/smaclell/4k/blob/master/CODE_OF_CONDUCT.md)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-This is a simple service for retrieving/interacting with the [4k world map data](http://4kworldmap.com/).
+This is a simple service for retrieving/interacting with the [4k world map data](http://4kworldmap.com/). The data exclusively belongs to 4k world map project.
 
 # Get started
 
 You must have Docker installed. If you are using Docker for Mac, make sure to share the repo directory.
 
 To develop the application run `./start.dev`
+
+# Managing the Data
+
+To simplify the data before publishing we import and restructure it from the individual regions and maps to flat files. To extract the data run:
+
+```
+node ./data/importer.js
+```
 
 # Contributing
 

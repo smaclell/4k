@@ -31,7 +31,10 @@ files.map((file) => {
       return null;
     }
 
-    const geojsonPath = path.join(__dirname, 'geojson', `${region.regionKey}.json`);
-    return fs.writeFileSync(geojsonPath, JSON.stringify(f));
+    const { regionKey } = region;
+
+    const geojsonPath = path.join(__dirname, 'geojson', `${regionKey}.json`);
+    const { properties, ...clean } = f;
+    return fs.writeFileSync(geojsonPath, JSON.stringify({ ...clean, properties: { regionKey } }));
   });
 });
