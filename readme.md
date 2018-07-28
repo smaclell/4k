@@ -1,4 +1,4 @@
-# ShareBibles Lite
+# 4k API
 
 [![CircleCI](https://circleci.com/gh/smaclell/4k/tree/master.svg?style=svg)](https://circleci.com/gh/smaclell/4k/tree/master)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
