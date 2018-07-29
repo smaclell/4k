@@ -26,5 +26,15 @@ module.exports = {
       "error",
       "always",
     ]
-  }
+  },
+  overrides: [
+    {
+      files: ["**/*.test.js"],
+      env: {
+        node: true,
+        mocha: true,
+      },
+      rules: {}
+    },
+  ],
 };
