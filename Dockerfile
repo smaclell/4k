@@ -7,7 +7,7 @@ ENV       APP_HOME /4k
 
 # Install Modules
 WORKDIR   $APP_HOME
-COPY      package.json yarn.lock $APP_HOME
+COPY      package.json yarn.lock $APP_HOME/
 RUN       NODE_ENV=development yarn install
 
 # Copy in files:
