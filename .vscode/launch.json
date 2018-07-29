@@ -13,6 +13,40 @@
       "localRoot": "${workspaceFolder}",
       "remoteRoot": "/4k",
       "protocol": "inspector"
-    }
+    },
+    {
+      "name": "Mocha",
+      "type": "node",
+      "request": "launch",
+      "stopOnEntry": false,
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "yarn",
+      "port": 29229,
+      "args": [
+          "test",
+          "--no-timeouts",
+          "-w",
+          "--inspect-brk=29229"
+      ]
+  },
+  {
+      "type": "node",
+      "request": "launch",
+      "name": "Mocha Current File",
+      "stopOnEntry": false,
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "yarn",
+      "port": 29229,
+      "args": [
+          "test",
+          "--no-timeouts",
+          "-w",
+          "--file",
+          "${file}",
+          "--inspect-brk=29229"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+  }
   ]
 }
