@@ -1,6 +1,6 @@
 module.exports = {
   parserOptions: {
-    ecmaVersion: 6,
+    ecmaVersion: 2017,
   },
   env: {
     node: true,
@@ -34,7 +34,11 @@ module.exports = {
         node: true,
         mocha: true,
       },
-      rules: {}
+      globals: {
+        expect: true,
+      },
+      rules: {
+      },
     },
   ],
 };
