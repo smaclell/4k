@@ -21,6 +21,78 @@ To simplify the data before publishing we import and restructure it from the ind
 node ./data/importer.js
 ```
 
+# API
+
+## `GET /region/:regionKey`
+
+Get basic data about the region.
+
+```http
+# REQUEST
+GET /region/CAN-MAN
+
+# REPONSE
+content-type: application/json
+
+{
+  "regionKey": "CAN-MAN",
+  "country": "Canada",
+  "province": "Manitoba",
+  "label": "Manitoba"
+}
+```
+
+## `GET /geojson/:regionKey`
+
+Get the geojson defining the shape of the region.
+
+```http
+# REQUEST
+GET /geojson/CAN-MAN
+
+# REPONSE
+content-type: application/json
+
+{
+    "type": "Feature",
+    "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+            [
+                [
+                    -98.1205501734768,
+                    54.2802499570956,
+                    0
+                ],
+                ...
+                [
+                    -98.1205501734768,
+                    54.2802499570956,
+                    0
+                ]
+            ],
+            ...
+            [
+                [
+                    -100.028849917578,
+                    53.0991501003509,
+                    0
+                ],
+                ...
+                [
+                    -98.1927499943503,
+                    57.6727498603561,
+                    0
+                ]
+            ]
+        ]
+    },
+    "properties": {
+        "regionKey": "CAN-MAN"
+    }
+}
+```
+
 # Contributing
 
 We maintain an active backlog of new features and bugs we would love your help with.
