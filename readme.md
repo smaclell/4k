@@ -107,6 +107,22 @@ Have a great idea or change you want to share? Awesome. We actively welcome pull
 
 We have adopted a [Code of Conduct]((https://github.com/smaclell/4k/blob/master/CODE_OF_CONDUCT.md)) that we expect project participants to adhere to. Please read the full text so that you can understand what actions will and will not be tolerated.
 
+# Deploying
+
+We are running the site using Zeit now.
+
+Deploy using:
+
+```
+now --docker --public
+```
+
+Then alias the new deployment to update the main site:
+
+```
+now alias 4k-yhgtxlebeu.now.sh 4kmaps
+```
+
 # License
 
 This project is [Apache 2.0](https://github.com/smaclell/4k/blob/master/LICENSE.md) Licensed. We also provide an additional patent grant.
