@@ -117,6 +117,8 @@ Deploy using:
 now --docker --public
 ```
 
+Test the new site to make sure the basics work.
+
 Then alias the new deployment to update the main site:
 
 ```
