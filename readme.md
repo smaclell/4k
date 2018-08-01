@@ -31,7 +31,7 @@ Get basic data about the region.
 # REQUEST
 GET /region/CAN-MAN
 
-# REPONSE
+# RESPONSE
 content-type: application/json
 
 {
@@ -50,7 +50,7 @@ Get the geojson defining the shape of the region.
 # REQUEST
 GET /geojson/CAN-MAN
 
-# REPONSE
+# RESPONSE
 content-type: application/json
 
 {
