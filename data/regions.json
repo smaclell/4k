@@ -4173,5 +4173,6 @@
   "IRN-THR-ROB": { "regionKey": "IRN-THR-ROB", "country": "Iran", "province": "Tehran", "label": "Robatkarim" },
   "IRN-THR-SHA": { "regionKey": "IRN-THR-SHA", "country": "Iran", "province": "Tehran", "label": "Shahriyar" },
   "USA-DIS": { "regionKey": "USA-DIS", "country": "United States of America", "province": "District of Columbia", "label": "District of Columbia" },
-  "USA-NCA-Z03": { "regionKey": "USA-NCA-Z03", "country": "United States of America", "province": "North Carolina", "label": "North Carolina Mountain" }
+  "USA-NCA-Z03": { "regionKey": "USA-NCA-Z03", "country": "United States of America", "province": "North Carolina", "label": "North Carolina Mountain" },
+  "TEST": { "regionKey": "TEST", "country": "Every", "province": "Where", "label": "Planet Earth" }
 }
