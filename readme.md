@@ -11,34 +11,69 @@ This is a simple service for retrieving/interacting with the [4k world map data]
 
 You must have Docker installed. If you are using Docker for Mac, make sure to share the repo directory.
 
+Please also install [Git LFS](https://git-lfs.github.com/). Our map files are large enough to have trouble fitting in a normal repo.
+
 To develop the application run `./start.dev`
 
 # Managing the Data
 
-To simplify the data before publishing we import and restructure it from the individual regions and maps to flat files. To extract the data run:
+To simplify the data before publishing we import and restructure it from the individual regions and maps to flat files. Update the individual files unders `maps` and then run either of the following:
 
 ```
-node ./data/importer.js
+node ./data/map.importer.js
+node ./data/region.importer.js
 ```
 
 # API
 
-## `GET /region/:regionKey`
+## `GET /regions`
 
-Get basic data about the region.
+Get the list of root regions.
 
 ```http
 # REQUEST
-GET /region/CAN-MAN
+GET /regions
 
 # RESPONSE
 content-type: application/json
 
 {
+  "_self": "/regions",
+  "roots": [
+    {
+      "regionKey": "ABW",
+      "href": "/regions/ABW"
+    }
+    ...
+  ]
+}
+```
+
+## `GET /regions/:regionKey`
+
+Get basic data about the region.
+
+```http
+# REQUEST
+GET /regions/CAN-MAN
+
+# RESPONSE
+content-type: application/json
+
+{
+  "_self": "/regions/CAN-MAN",
   "regionKey": "CAN-MAN",
+  "label": "Manitoba",
   "country": "Canada",
-  "province": "Manitoba",
-  "label": "Manitoba"
+  "center": {
+    "latitude": -97.3639242589,
+    "longitude": 55.0593228371
+  },
+  "parentRegion": {
+    "regionKey": "CAN",
+    "href": "/regions/CAN"
+  },
+  "children": []
 }
 ```
 
