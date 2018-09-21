@@ -11,7 +11,7 @@ Object.values(raw).forEach((region) => {
   if (last < 0) {
     // eslint-disable-next-line no-param-reassign
     region.parentRegionKey = null;
-    roots.push(region);
+    roots.push(region.regionKey);
     return;
   }
 
@@ -27,6 +27,7 @@ Object.values(raw).forEach((region) => {
   }
 });
 
+roots.sort();
 Object.values(raw).forEach(region => region.children.sort());
 
 module.exports = {

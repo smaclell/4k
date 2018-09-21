@@ -11,6 +11,18 @@ describe('server/api/regions', () => {
     agent = supertest.agent(app);
   });
 
+  it('lists roots', async () => {
+    const res = await agent.get('/regions');
+
+    expect(res.status).to.equal(200);
+    expect(res.body).to.have.a.property('_self', '/regions');
+
+    expect(res.body.all).to.deep.include({
+      regionKey: 'CAN',
+      href: '/regions/CAN',
+    });
+  });
+
   it('gets a known region', async () => {
     const res = await agent.get('/regions/CAN-MAN');
 

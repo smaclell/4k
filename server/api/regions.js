@@ -1,6 +1,20 @@
 const createError = require('http-errors');
 const regions = require('../../data/regions');
 
+const project = regionKey => ({
+  regionKey,
+  href: `/regions/${regionKey}`,
+});
+
+exports.list = (req, res) => {
+  const response = {
+    _self: '/regions',
+    all: regions.roots.map(project),
+  };
+
+  res.status(200).json(response);
+};
+
 exports.get = (req, res, next) => {
   const { regionKey } = req.params;
   if (!regionKey) {
@@ -27,16 +41,10 @@ exports.get = (req, res, next) => {
   }
 
   if (region.parentRegionKey) {
-    response.parentRegion = {
-      regionKey: region.parentRegionKey,
-      href: `/regions/${region.parentRegionKey}`,
-    };
+    response.parentRegion = project(region.parentRegionKey);
   }
 
-  response.children = (region.children || []).map(key => ({
-    regionKey: key,
-    href: `/regions/${key}`,
-  }));
+  response.children = (region.children || []).map(project);
 
   return res.status(200).json(response);
 };
