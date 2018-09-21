@@ -9,7 +9,7 @@ const project = regionKey => ({
 exports.list = (req, res) => {
   const response = {
     _self: '/regions',
-    all: regions.roots.map(project),
+    roots: regions.roots.map(project),
   };
 
   res.status(200).json(response);

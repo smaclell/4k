@@ -17,7 +17,7 @@ describe('server/api/regions', () => {
     expect(res.status).to.equal(200);
     expect(res.body).to.have.a.property('_self', '/regions');
 
-    expect(res.body.all).to.deep.include({
+    expect(res.body.roots).to.deep.include({
       regionKey: 'CAN',
       href: '/regions/CAN',
     });

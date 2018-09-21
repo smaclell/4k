@@ -16,8 +16,7 @@ describe('server/api/geojson', () => {
 
     expect(res.status).to.equal(200);
     expect(res.body.type).to.equal('Feature');
-    expect(res.body.geometry).to.have.property('type', 'Polygon');
-    expect(res.body.geometry).to.have.keys('type', 'coordinates');
+    expect(res.body.geometry).to.include.keys('type', 'geometries');
     expect(res.body.properties).to.deep.equal({
       regionKey: 'CAN-MAN',
     });
