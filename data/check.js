@@ -3,7 +3,7 @@ const path = require('path');
 const regions = require('./regions');
 
 // Check for missing geojson
-const missing = Object.keys(regions)
+const missing = Object.keys(regions.lookup)
   .map(r => path.join(__dirname, 'geojson', `${r}.json`))
   .filter(p => !fs.existsSync(p));
 
