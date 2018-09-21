@@ -7,7 +7,6 @@ const tj = require('togeojson');
 const fs = require('fs');
 const path = require('path');
 const { DOMParser } = require('xmldom');
-const { JSDOM } = require('jsdom');
 
 const mapsDir = path.join(__dirname, 'maps');
 const files = fs.readdirSync(mapsDir);
