@@ -14,6 +14,8 @@ app.use(bodyParser.json());
 app.get('/status', (req, res) => res.status(200).json({ ok: true }));
 
 app.get('/geojson/:regionKey', geojson.get);
+
+app.get('/regions', regions.list);
 app.get('/regions/:regionKey', regions.get);
 
 app.use((req, res, next) => next(createError(404, 'not found')));
