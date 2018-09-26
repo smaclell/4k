@@ -44,6 +44,29 @@ function getRegionKey(description) {
   return null;
 }
 
+const TEST = {
+  type: 'Feature',
+  geometry: {
+    type: 'Polygon',
+    coordinates: [
+      [
+        [-180, -90, 0],
+        [-180,  90, 0], // eslint-disable-line no-multi-spaces
+        [ 180,  90, 0], // eslint-disable-line no-multi-spaces, array-bracket-spacing
+        [ 180, -90, 0], // eslint-disable-line array-bracket-spacing
+        [-180, -90, 0],
+      ],
+    ],
+  },
+  properties: {
+    description: `
+<td>WorldID</td>
+
+<td>TEST</td>
+    `,
+  },
+};
+
 function writeRegion(feature) {
   try {
     const regionKey = getRegionKey(feature.properties.description);
@@ -71,5 +94,5 @@ files.map((file) => {
     return [];
   }
 
-  return getFeatures(file).map(writeRegion);
+  return getFeatures(file).concat(TEST).map(writeRegion);
 });
