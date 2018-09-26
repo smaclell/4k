@@ -6,6 +6,8 @@
 const tj = require('togeojson');
 const fs = require('fs');
 const path = require('path');
+const Pbf = require('pbf');
+const geobuf = require('geobuf');
 const { DOMParser } = require('xmldom');
 
 const mapsDir = path.join(__dirname, 'maps');
@@ -81,8 +83,10 @@ function writeRegion(feature) {
     // eslint-disable-next-line no-param-reassign
     feature.properties = { regionKey };
 
-    const geojsonPath = path.join(__dirname, 'geojson', `${regionKey}.json`);
-    return fs.writeFileSync(geojsonPath, JSON.stringify(feature));
+    const geojsonPath = path.join(__dirname, 'geojson', `${regionKey}.proto`);
+    const proto = geobuf.encode(feature, new Pbf());
+
+    return fs.writeFileSync(geojsonPath, proto);
   } catch (err) {
     console.error('Failed to parse:', feature.id, err);
     return null;
