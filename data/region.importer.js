@@ -24,8 +24,8 @@ records.forEach((record) => {
 
   if (Math.abs(x) + Math.abs(y) > 1) {
     region.center = {
-      x: parseFloat(record.Cen_x),
-      y: parseFloat(record.Cen_y),
+      x,
+      y,
     };
   }
 
