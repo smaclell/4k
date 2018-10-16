@@ -15,9 +15,9 @@ function getFeatures(file) {
   const filePath = path.join(mapsDir, file);
   const content = fs.readFileSync(filePath, 'utf8');
   const kml = new DOMParser().parseFromString(content);
-  console.log('starting');
+
   const { features } = tj.kml(kml);
-  console.log("done");
+
   return features;
 }
 
@@ -66,14 +66,12 @@ function writeRegion(feature) {
     };
 
     if (feature && feature.geometry && feature.geometry.type.toLowerCase() === 'geometrycollection') {
-      console.log("HIT geometrycollection", regionKey);
       feature.geometry.geometries.map(geometry => {
         const feat = {
           "type": "Feature",
           "properties": { regionKey },
           "geometry": geometry,
         };
-        // console.log("Feature: ", JSON.stringify(feat));
         res.features.push(feat);
       })
     } else {
