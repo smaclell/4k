@@ -1,7 +1,7 @@
 FROM      node:8.11.3-alpine
-EXPOSE    80
+EXPOSE    8888
 
-CMD       ["yarn", "run", "start"]
+CMD       ["yarn", "run -p 8888:888", "start"]
 
 ENV       APP_HOME=/4k NODE_ENV=production
 
