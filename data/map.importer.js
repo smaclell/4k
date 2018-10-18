@@ -61,6 +61,7 @@ const TEST = {
     ],
   },
   properties: {
+    regionKey: 'TEST',
     description: `
 <td>WorldID</td>
 
@@ -80,11 +81,24 @@ function writeRegion(feature) {
       throw new Error(`Invalid Region: ${regionKey}`);
     }
 
-    // eslint-disable-next-line no-param-reassign
-    feature.properties = { regionKey };
+    const res = {
+      type: 'FeatureCollection',
+      features: [],
+      properties: { regionKey },
+    };
+
+    if (feature && feature.geometry && feature.geometry.type && feature.geometry.type.toLowerCase() === 'geometrycollection') {
+      feature.geometry.geometries.map(geometry => res.features.push({
+        type: 'Feature',
+        properties: { regionKey },
+        geometry,
+      }));
+    } else {
+      res.features.push(feature);
+    }
 
     const geojsonPath = path.join(__dirname, 'geojson', `${regionKey}.proto`);
-    const proto = geobuf.encode(feature, new Pbf());
+    const proto = geobuf.encode(res, new Pbf());
 
     return fs.writeFileSync(geojsonPath, proto);
   } catch (err) {
