@@ -6,6 +6,8 @@
 const tj = require('togeojson');
 const fs = require('fs');
 const path = require('path');
+const Pbf = require('pbf');
+const geobuf = require('geobuf');
 const { DOMParser } = require('xmldom');
 
 const mapsDir = path.join(__dirname, 'maps');
@@ -44,6 +46,30 @@ function getRegionKey(description) {
   return null;
 }
 
+const TEST = {
+  type: 'Feature',
+  geometry: {
+    type: 'Polygon',
+    coordinates: [
+      [
+        [-180, -90, 0],
+        [-180,  90, 0], // eslint-disable-line no-multi-spaces
+        [ 180,  90, 0], // eslint-disable-line no-multi-spaces, array-bracket-spacing
+        [ 180, -90, 0], // eslint-disable-line array-bracket-spacing
+        [-180, -90, 0],
+      ],
+    ],
+  },
+  properties: {
+    regionKey: 'TEST',
+    description: `
+<td>WorldID</td>
+
+<td>TEST</td>
+    `,
+  },
+};
+
 function writeRegion(feature) {
   try {
     const regionKey = getRegionKey(feature.properties.description);
@@ -55,11 +81,26 @@ function writeRegion(feature) {
       throw new Error(`Invalid Region: ${regionKey}`);
     }
 
-    // eslint-disable-next-line no-param-reassign
-    feature.properties = { regionKey };
+    const res = {
+      type: 'FeatureCollection',
+      features: [],
+      properties: { regionKey },
+    };
 
-    const geojsonPath = path.join(__dirname, 'geojson', `${regionKey}.json`);
-    return fs.writeFileSync(geojsonPath, JSON.stringify(feature));
+    if (feature && feature.geometry && feature.geometry.type && feature.geometry.type.toLowerCase() === 'geometrycollection') {
+      feature.geometry.geometries.map(geometry => res.features.push({
+        type: 'Feature',
+        properties: { regionKey },
+        geometry,
+      }));
+    } else {
+      res.features.push(feature);
+    }
+
+    const geojsonPath = path.join(__dirname, 'geojson', `${regionKey}.proto`);
+    const proto = geobuf.encode(res, new Pbf());
+
+    return fs.writeFileSync(geojsonPath, proto);
   } catch (err) {
     console.error('Failed to parse:', feature.id, err);
     return null;
@@ -71,5 +112,5 @@ files.map((file) => {
     return [];
   }
 
-  return getFeatures(file).map(writeRegion);
+  return getFeatures(file).concat(TEST).map(writeRegion);
 });
