@@ -94,6 +94,8 @@ function writeRegion(feature) {
         geometry,
       }));
     } else {
+      // eslint-disable-next-line no-param-reassign
+      feature.properties = { regionKey };
       res.features.push(feature);
     }
 
